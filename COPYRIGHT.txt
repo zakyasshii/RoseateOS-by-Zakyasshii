@@ -1,0 +1,8 @@
+Copyright © 2025 Farish Aqasha (Zakyasshii Technologies)
+All rights reserved.
+
+RoseateOS and all associated source code, design, features, and content are the exclusive intellectual property of Farish Aqasha, also known as Zakyasshii, under the developer alias Zakyasshii Technologies. 
+
+Zakyasshii Technologies is a personal developer brand and not a registered legal entity. All legal rights, responsibilities, and claims belong solely to Farish Aqasha.
+
+Unauthorized reproduction, distribution, or use of any part of RoseateOS is strictly prohibited and may result in legal action. 

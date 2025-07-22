@@ -1,0 +1,102 @@
+---
+alwaysApply: true
+---
+Blueprint for RoseateOS
+
+1. App Concept Overview
+
+**Powered by Flutter 
+
+App Name: RoseateOS
+Type: Offline-first, closed-source mobile productivity application for both Android and Ios (Prioritize android first)
+Core Focus: Privacy, personalization, and self-optimization
+Target Audience: Individuals looking for full control over their productivity workflows, with a strong emphasis on data security.
+
+Reference for the whole project (refer to project file name)
+App logo: : "apklogo-roseateOS.png"
+App copyright: "COPYRIGHT.txt"
+App terms and conditions: "t&c.md"
+Developer information for About Us part in mobile app: "about_us.md"
+
+2. Core Features & Functionality
+
+User Profile & Settings
+Personalized profile with user information (name, age, etc.).
+Options for customizing app settings.
+Privacy-centric user data management (encrypted storage, no cloud-based syncing).
+Rule: Ensure privacy by storing all data locally and not transmitting user info online.
+
+Life Dashboard
+Centralized hub displaying:
+Daily Planner
+Calendar & Event Reminder
+Progress Meters (Goals, Targets)
+Rule: Data must remain offline, and all user data must be loaded from local storage.
+
+Seasonal UI Theme
+The app’s theme changes automatically based on the date and time to reflect four seasonal aesthetic vibes of their own aesthethic colour combination representation (Spring, Summer, Fall, Winter).
+Users can override the seasonal theme and manually set their preference in setting
+Rule: The seasonal theme must adjust without causing lag, and the UI should adapt fluidly to system time.
+
+Productivity Tools
+
+Daily Planner & Calendar: Users can schedule tasks and events, with notifications (offline only).
+To-Do List with Prioritization: Smart prioritization based on user’s habits and deadlines.
+Upcoming Target Tracker: Automatically tracks and reminds users of upcoming goals or targets.
+Goal Tracker: Visual progress meters to track progress on personal goals.
+Financial Tracker: Helps users manage their budget offline.
+Notes Center, Brain Dump, and Idea Vault: A personal storage area for all user thoughts and ideas.
+Business Contact Book: For organizing and storing professional networking information.
+Rule: Ensure all input and output data are encrypted and stored locally. All reminders and progress trackers should work without internet dependency.
+
+Encrypted Data Storage
+
+Ensure that all user content (notes, contacts, goals) is encrypted and stored locally, with strong encryption methods for data security.
+Rule: Implement AES-256 encryption for data security.
+
+3. User Flow
+
+First Time Launch:
+The app will ask the user to agree to the terms and conditions before proceeding (one-time).
+User’s profile information is collected automatically and stored securely.
+After agreeing to the terms and completing the profile setup, the user is taken to the main menu. If not, the app forced closed.
+Rule: Ensure that the agreement and profile setup only occur once at the first launch.
+
+Subsequent Launches:
+Direct access to the Life Dashboard after successfully loading data from local storage.
+Rule: No need for an internet connection after the first launch; everything works offline.
+
+4. Privacy and Security
+
+Privacy: Data is never uploaded to any server or cloud. All data is handled locally.
+Encryption: AES-256 encryption for all stored data.
+Offline-First: No data is transmitted over the network unless specified by the user (e.g., syncing preferences).
+Rule: Data access is restricted by strong user authentication (PIN - optional and user can setup and toogle enable/disable in Setting where the next login requires PIN 6-digit password)
+
+5. Backend Integration (Cursor AI)
+
+User Profile: Cursor AI will handle the secure storage and encryption of the user profile data.
+Data Storage: Cursor AI will manage local encrypted storage for all user-generated data (to-do list, goals, etc.).
+Analytics: Cursor AI will help analyze user productivity data, providing insight into performance patterns (heatmaps, etc.).
+Rule: Ensure that no personal data is transmitted over the network unless specifically needed for a feature like data backup (optional).
+
+6. Frontend Design (v0.dev)
+
+UI/UX Design: The app must be aesthetically pleasing, with smooth transitions between themes, data visualization tools (progress meters, heatmaps), and productivity tools.
+Seasonal UI: Ensure fluid transitions between seasonal themes based on system time.
+User Experience: The app should be lightweight and responsive, with no lag when switching between sections or interacting with the planner.
+Rule: The app should adapt to different screen sizes and resolutions, ensuring compatibility with various Android and Ios devices.
+
+# Cursor AI Rules
+
+To guide Cursor AI in maintaining this blueprint, the following rules are proposed:
+
+Data Privacy Rule: Ensure all user data is stored locally. Encrypt sensitive data using AES-256 encryption. No external communication unless necessary (e.g., optional backups).
+
+UI Consistency Rule: Ensure the UI adapts smoothly to seasonal changes and offers a manual override for users.
+
+Offline Functionality Rule: Ensure all functionalities (planner, notes, trackers) work fully offline, without needing an internet connection.
+
+Data Security Rule: Implement AES-256 encryption for all stored data, and ensure that data is not accessible without user authentication.
+
+Progress Tracking Rule: Implement automatic tracking and visual representation of user progress for goals, tasks, and finances.
