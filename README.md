@@ -119,13 +119,13 @@ flutter build ios --release
 ---
 
 ## Developer & Contact
-- **Developer:** Farish Aqasha (Zakyasshii Technologies)
-- **Contact:** zakyasshii@gmail.com | [@zakyashii](https://instagram.com/zakyashii)
+- **Developer:** Farish Aqasha (Zakyasshii's Technologies)
+- **Contact:** zakyasshii@gmail.com | [@zakyashii] (https://instagram.com/zakyashii)
 
 ---
 
 ## License
-RoseateOS is closed-source and proprietary. All rights reserved © 2025 Farish Aqasha (Zakyasshii Technologies).
+RoseateOS is closed-source and proprietary. All rights reserved © 2025 Farish Aqasha (Zakyasshii's Technologies).
 
 ---
 
