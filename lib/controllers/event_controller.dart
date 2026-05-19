@@ -1,4 +1,3 @@
-import 'package:hive/hive.dart';
 import '../models/event.dart';
 import '../services/encrypted_hive_service.dart';
 

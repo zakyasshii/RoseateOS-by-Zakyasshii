@@ -7,7 +7,7 @@ class FirstLaunchController {
     await StorageService.saveUserProfile(profile);
   }
 
-  UserProfile? getProfile() {
+  Future<UserProfile?> getProfile() async {
     return StorageService.loadUserProfile();
   }
 } 
