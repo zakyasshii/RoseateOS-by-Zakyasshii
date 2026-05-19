@@ -48,9 +48,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   Future<void> _editReminder(Reminder reminder) async {
+    final messenger = ScaffoldMessenger.of(context);
     await showDialog(
       context: context,
-      builder: (context) => ReminderDialog(
+      builder: (_) => ReminderDialog(
         dialogTitle: 'Edit Event Reminder',
         initialTitle: reminder.title,
         initialDateTime: reminder.dateTime,
@@ -72,7 +73,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
           );
           await _reminderController.updateReminder(reminder.id, updated);
           await _loadReminders();
-          final messenger = ScaffoldMessenger.of(context);
           if (!mounted) return;
           messenger.showSnackBar(
             SnackBar(content: Text('Reminder updated!')),

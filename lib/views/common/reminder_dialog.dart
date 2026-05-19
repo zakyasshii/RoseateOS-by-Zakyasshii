@@ -3,7 +3,12 @@ import 'package:intl/intl.dart';
 
 class ReminderDialog extends StatefulWidget {
   final String dialogTitle;
-  final void Function(String title, DateTime dateTime, String recurrence, int? customInterval) onSet;
+  final Future<void> Function(
+    String title,
+    DateTime dateTime,
+    String recurrence,
+    int? customInterval,
+  ) onSet;
   final String? initialTitle;
   final DateTime? initialDateTime;
 
@@ -141,18 +146,28 @@ class _ReminderDialogState extends State<ReminderDialog> {
           child: const Text('Cancel'),
         ),
         ElevatedButton(
-          onPressed: () {
-            if (_titleController.text.isNotEmpty && _selectedDate != null && _selectedTime != null) {
-              final dt = DateTime(
-                _selectedDate!.year,
-                _selectedDate!.month,
-                _selectedDate!.day,
-                _selectedTime!.hour,
-                _selectedTime!.minute,
-              );
-              widget.onSet(_titleController.text, dt, _recurrence, _customInterval);
-              Navigator.of(context).pop();
+          onPressed: () async {
+            if (_titleController.text.isEmpty ||
+                _selectedDate == null ||
+                _selectedTime == null) {
+              return;
             }
+
+            final dt = DateTime(
+              _selectedDate!.year,
+              _selectedDate!.month,
+              _selectedDate!.day,
+              _selectedTime!.hour,
+              _selectedTime!.minute,
+            );
+            await widget.onSet(
+              _titleController.text,
+              dt,
+              _recurrence,
+              _customInterval,
+            );
+            if (!context.mounted) return;
+            Navigator.of(context).pop();
           },
           child: Text(isEditing ? 'Update Reminder' : 'Set Reminder'),
         ),
