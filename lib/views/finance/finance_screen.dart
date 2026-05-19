@@ -66,8 +66,9 @@ class _FinanceScreenState extends State<FinanceScreen> {
           );
           await _reminderController.updateReminder(reminder.id, updated);
           await _loadReminders();
+          final messenger = ScaffoldMessenger.of(context);
           if (!mounted) return;
-          ScaffoldMessenger.of(context).showSnackBar(
+          messenger.showSnackBar(
             SnackBar(content: Text('Reminder updated!')),
           );
         },
