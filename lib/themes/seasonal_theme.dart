@@ -8,13 +8,14 @@ class SeasonalTheme extends InheritedWidget {
   final Color backgroundColor;
   final void Function(Season)? onOverride;
 
-  SeasonalTheme({
+  const SeasonalTheme({
+    super.key,
     required this.season,
     required this.primaryColor,
     required this.backgroundColor,
     this.onOverride,
-    required Widget child,
-  }) : super(child: child);
+    required super.child,
+  });
 
   static SeasonalTheme of(BuildContext context) {
     final SeasonalTheme? result = context.dependOnInheritedWidgetOfExactType<SeasonalTheme>();

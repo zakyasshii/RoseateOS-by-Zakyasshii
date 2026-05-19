@@ -35,11 +35,10 @@ class _PlannerScreenState extends State<PlannerScreen> {
       Reminder(id: id, title: title, dateTime: dateTime, type: 'task', recurrence: recurrence, customInterval: customInterval),
     );
     await _loadReminders();
-    if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Task and reminder scheduled!')),
-      );
-    }
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Task and reminder scheduled!')),
+    );
   }
 
   Future<void> _deleteReminder(Reminder reminder) async {
@@ -73,11 +72,10 @@ class _PlannerScreenState extends State<PlannerScreen> {
           );
           await _reminderController.updateReminder(reminder.id, updated);
           await _loadReminders();
-          if (context.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Reminder updated!')),
-            );
-          }
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Reminder updated!')),
+          );
         },
       ),
     );

@@ -35,11 +35,10 @@ class _FinanceScreenState extends State<FinanceScreen> {
       Reminder(id: id, title: title, dateTime: dateTime, type: 'finance', recurrence: recurrence, customInterval: customInterval),
     );
     await _loadReminders();
-    if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Finance reminder scheduled!')),
-      );
-    }
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Finance reminder scheduled!')),
+    );
   }
 
   Future<void> _editReminder(Reminder reminder) async {
@@ -67,11 +66,10 @@ class _FinanceScreenState extends State<FinanceScreen> {
           );
           await _reminderController.updateReminder(reminder.id, updated);
           await _loadReminders();
-          if (context.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Reminder updated!')),
-            );
-          }
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Reminder updated!')),
+          );
         },
       ),
     );
