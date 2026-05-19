@@ -75,6 +75,12 @@ flutter build ios --release
 
 Release APK output: `build/app/outputs/flutter-apk/app-release.apk`
 
+Latest verified Android APK: [`RoseateOS.apk`](https://drive.google.com/file/d/1wTG4ZVU6Z1vZBqM_VxBaqZnfyW2hwd3z/view?usp=drivesdk)
+
+- CI run: https://github.com/zakyasshii/RoseateOS-by-Zakyasshii/actions/runs/26131158542
+- APK SHA-256: `355b161c5ae884e682fd820f3b0bba0f90162cfbea2056045643a3dac2efe1f7`
+- APK size: 59,252,158 bytes
+
 ---
 
 ## CI
