@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class PinService {
   static const _pinKey = 'user_pin';
   static const _pinEnabledKey = 'pin_enabled';
+  static const _biometricEnabledKey = 'biometric_enabled';
   static final _storage = const FlutterSecureStorage();
 
   static Future<void> setPin(String pin) async {
@@ -17,6 +18,19 @@ class PinService {
   static Future<void> removePin() async {
     await _storage.delete(key: _pinKey);
     await setPinEnabled(false);
+    await setBiometricEnabled(false);
+  }
+
+  static Future<void> setBiometricEnabled(bool enabled) async {
+    await _storage.write(
+      key: _biometricEnabledKey,
+      value: enabled ? 'true' : 'false',
+    );
+  }
+
+  static Future<bool> isBiometricEnabled() async {
+    final value = await _storage.read(key: _biometricEnabledKey);
+    return value == 'true';
   }
 
   static Future<void> setPinEnabled(bool enabled) async {

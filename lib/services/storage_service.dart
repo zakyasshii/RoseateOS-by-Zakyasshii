@@ -1,15 +1,26 @@
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../models/user_profile.dart';
+import '../models/contact.dart';
 import 'encrypted_hive_service.dart';
 
 class StorageService {
   static const String userProfileBox = 'user_profile_box';
+  static bool _adaptersRegistered = false;
 
   static Future<void> init() async {
     await Hive.initFlutter();
-    Hive.registerAdapter(UserProfileAdapter());
+    if (!_adaptersRegistered) {
+      Hive.registerAdapter(UserProfileAdapter());
+      Hive.registerAdapter(ContactAdapter());
+      _adaptersRegistered = true;
+    }
     await EncryptedHiveService.openEncryptedBox<UserProfile>(userProfileBox);
+  }
+
+  static Future<bool> hasUserProfile() async {
+    final profile = await loadUserProfile();
+    return profile != null;
   }
 
   static Future<void> saveUserProfile(UserProfile profile) async {

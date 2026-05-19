@@ -1,3 +1,5 @@
+/// Reserved for future dashboard aggregation (tasks, goals, events).
+/// The Life Dashboard screen currently navigates to feature screens directly.
 class DashboardController {
-  // TODO: Implement logic for loading tasks, goals, events, etc.
-} 
+  const DashboardController();
+}

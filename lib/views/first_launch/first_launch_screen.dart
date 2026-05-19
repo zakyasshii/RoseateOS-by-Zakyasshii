@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../controllers/first_launch_controller.dart';
-import '../../services/storage_service.dart';
+import '../dashboard/dashboard_screen.dart';
 
 class FirstLaunchScreen extends StatefulWidget {
-  const FirstLaunchScreen({super.key});
+  final VoidCallback? onProfileCreated;
+
+  const FirstLaunchScreen({super.key, this.onProfileCreated});
 
   @override
   State<FirstLaunchScreen> createState() => _FirstLaunchScreenState();
@@ -17,23 +19,17 @@ class _FirstLaunchScreenState extends State<FirstLaunchScreen> {
   final _controller = FirstLaunchController();
   bool _saving = false;
 
-  @override
-  void initState() {
-    super.initState();
-    StorageService.init();
-  }
-
   void _onContinue() async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
       setState(() => _saving = true);
       await _controller.saveProfile(_name!, _age!);
       setState(() => _saving = false);
-      if (mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const MainMenuScreen()),
-        );
-      }
+      if (!mounted) return;
+      widget.onProfileCreated?.call();
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => const DashboardScreen()),
+      );
     }
   }
 
@@ -46,11 +42,16 @@ class _FirstLaunchScreenState extends State<FirstLaunchScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Terms & Conditions', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text(
+              'Terms & Conditions',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Text(
-                  'Please read and accept the Terms & Conditions to continue. (Full T&C will be loaded here.)',
+                  'Please read and accept the Terms & Conditions to continue. '
+                  'All data stays on this device. RoseateOS does not sync your '
+                  'information to the cloud.',
                   style: TextStyle(fontSize: 14),
                 ),
               ),
@@ -59,21 +60,26 @@ class _FirstLaunchScreenState extends State<FirstLaunchScreen> {
               children: [
                 Checkbox(
                   value: _agreedToTerms,
-                  onChanged: (val) => setState(() => _agreedToTerms = val ?? false),
+                  onChanged: (val) =>
+                      setState(() => _agreedToTerms = val ?? false),
                 ),
                 const Text('I agree to the Terms & Conditions'),
               ],
             ),
             if (_agreedToTerms) ...[
               const Divider(),
-              const Text('Profile Setup', style: TextStyle(fontWeight: FontWeight.bold)),
+              const Text(
+                'Profile Setup',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               Form(
                 key: _formKey,
                 child: Column(
                   children: [
                     TextFormField(
                       decoration: const InputDecoration(labelText: 'Name'),
-                      validator: (val) => val == null || val.isEmpty ? 'Enter your name' : null,
+                      validator: (val) =>
+                          val == null || val.isEmpty ? 'Enter your name' : null,
                       onSaved: (val) => _name = val,
                     ),
                     TextFormField(
@@ -92,7 +98,7 @@ class _FirstLaunchScreenState extends State<FirstLaunchScreen> {
                         ? const CircularProgressIndicator()
                         : ElevatedButton(
                             onPressed: _onContinue,
-                            child: const Text('Continue'),
+                            child: const Text('Continue to Dashboard'),
                           ),
                   ],
                 ),
@@ -104,15 +110,3 @@ class _FirstLaunchScreenState extends State<FirstLaunchScreen> {
     );
   }
 }
-
-class MainMenuScreen extends StatelessWidget {
-  const MainMenuScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('RoseateOS Main Menu')),
-      body: const Center(child: Text('Main Menu Placeholder')), // TODO: Replace with Life Dashboard
-    );
-  }
-} 
